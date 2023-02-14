@@ -7,5 +7,5 @@ import GetTestsList from "./getTestsList";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  return <GetTestsList />;
+  return "Hello world!";
 }
