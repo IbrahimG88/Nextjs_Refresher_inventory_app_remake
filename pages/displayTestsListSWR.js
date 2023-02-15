@@ -19,3 +19,7 @@ export default function Avatar() {
     </div>
   );
 }
+
+//not working
+
+// current question: how to store data locally after downloading it or fetching data

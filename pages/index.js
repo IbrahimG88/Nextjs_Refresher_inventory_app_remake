@@ -1,11 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
-import GetTestsList from "./getTestsList";
-
-const inter = Inter({ subsets: ["latin"] });
+import AppContext from "@/components/AppContext";
+import { useContext } from "react";
 
 export default function Home() {
-  return "Hello world!";
+  const context = useContext(AppContext);
+  return <h1>{context.nameContext}</h1>;
 }
