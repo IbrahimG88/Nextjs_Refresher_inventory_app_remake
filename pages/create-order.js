@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 
+import { useRouter } from "next/router";
+
 export default function CreateOrder() {
   const [inventory, setInventory] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+
+  const router = useRouter();
 
   // Using useEffect to call the API once mounted and set the data
   useEffect(() => {
@@ -50,6 +54,16 @@ export default function CreateOrder() {
   const handleSubmit = () => {
     // Here you can send the selected items to the server and store them in MongoDB
     console.log(selectedItems);
+
+    router.push({
+      pathname: "/OrderDetailsPage",
+      query: { selectedItems: JSON.stringify(selectedItems) },
+    });
+
+    console.log("selectedItems after push:", selectedItems);
+
+    // Clear the selected items state by setting it to an empty array
+    setSelectedItems([]);
   };
 
   return (
