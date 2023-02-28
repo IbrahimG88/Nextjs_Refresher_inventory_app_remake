@@ -71,29 +71,36 @@ export default function CreateOrder() {
       >
         Submit order
       </button>
-      <ul className="list-disc pl-4 mt-4">
-        {inventory.map((item) => (
-          <li key={item.id} className="mb-2">
-            <div className="text-gray-700 font-medium">{item.testName}</div>
-            <div className="text-gray-500 text-sm">
-              Total Stocks: {item.TotalStocks}
-            </div>
-            <div className="mt-2">
-              <input
-                type="number"
-                min="0"
-                value={
-                  selectedItems.find(
-                    (selectedItem) => selectedItem.id === item.id
-                  )?.orderQuantity || ""
-                }
-                onChange={(e) => handleItemSelection(item, e.target.value)}
-                className="border border-gray-400 rounded py-2 px-3 w-24 focus:outline-none focus:border-blue-500"
-              />
-            </div>
-          </li>
-        ))}
-      </ul>
+      <table className="table-auto mt-4">
+        <thead>
+          <tr>
+            <th className="px-4 py-2">Test Name</th>
+            <th className="px-4 py-2">Total Stocks</th>
+            <th className="px-4 py-2">Order Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inventory.map((item) => (
+            <tr key={item.id}>
+              <td className="border px-4 py-2">{item.testName}</td>
+              <td className="border px-4 py-2">{item.TotalStocks}</td>
+              <td className="border px-4 py-2">
+                <input
+                  type="number"
+                  min="0"
+                  value={
+                    selectedItems.find(
+                      (selectedItem) => selectedItem.id === item.id
+                    )?.orderQuantity || ""
+                  }
+                  onChange={(e) => handleItemSelection(item, e.target.value)}
+                  className="border border-gray-400 rounded py-2 px-3 w-24 focus:outline-none focus:border-blue-500"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
