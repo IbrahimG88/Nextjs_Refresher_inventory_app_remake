@@ -7,5 +7,15 @@ export default function OrderDetailsPage() {
 
   console.log("selectedItems:", selectedItems);
 
-  return <OrderDetails selectedItems={JSON.parse(selectedItems)} />;
+  let parsedItems = [];
+
+  try {
+    // use an empty array as a fallback value
+    parsedItems = JSON.parse(selectedItems || "[]");
+  } catch (error) {
+    console.error(error);
+    // handle error here
+  }
+
+  return <OrderDetails selectedItems={parsedItems} />;
 }
