@@ -44,9 +44,17 @@ export default function CreateOrder() {
       if (existingIndex !== -1) {
         const newSelectedItems = [...prevSelectedItems];
         newSelectedItems[existingIndex].orderQuantity = orderQuantity;
+        newSelectedItems[existingIndex].TotalAfterOrder =
+          parseInt(newSelectedItems[existingIndex].TotalStocks) +
+          parseInt(orderQuantity);
         return newSelectedItems;
       } else {
-        return [...prevSelectedItems, { ...item, orderQuantity }];
+        const TotalAfterOrder =
+          parseInt(item.TotalStocks) + parseInt(orderQuantity);
+        return [
+          ...prevSelectedItems,
+          { ...item, orderQuantity, TotalAfterOrder },
+        ];
       }
     });
   };
