@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 export default function CreateOrder() {
   const [inventory, setInventory] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const router = useRouter();
 
@@ -70,15 +71,28 @@ export default function CreateOrder() {
     setSelectedItems([]);
   };
 
+  const filteredInventory = inventory.filter((item) =>
+    item.testName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-4">
       <h2 className="text-lg font-bold mb-4">Select items from inventory</h2>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={handleSubmit}
-      >
-        Submit order
-      </button>
+      <div className="flex justify-between mb-4">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search by test name"
+          className="border border-gray-400 rounded py-2 px-3 w-full focus:outline-none focus:border-blue-500"
+        />
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleSubmit}
+        >
+          Submit order
+        </button>
+      </div>
       <table className="table-auto mt-4">
         <thead>
           <tr>
@@ -88,7 +102,7 @@ export default function CreateOrder() {
           </tr>
         </thead>
         <tbody>
-          {inventory.map((item) => (
+          {filteredInventory.map((item) => (
             <tr key={item.id}>
               <td className="border px-4 py-2">{item.testName}</td>
               <td className="border px-4 py-2">{item.TotalStocks}</td>

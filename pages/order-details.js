@@ -6,7 +6,6 @@ export default function OrderDetails({ selectedItems }) {
   const [supplierName, setSupplierName] = useState("");
   const [supplierMobile, setSupplierMobile] = useState("");
   const [urgency, setUrgency] = useState("medium");
-
   const downloadExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(selectedItems);
     const headerData = [
@@ -18,6 +17,7 @@ export default function OrderDetails({ selectedItems }) {
       [],
     ];
     XLSX.utils.sheet_add_aoa(worksheet, headerData, { origin: -1 });
+
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     XLSX.writeFile(workbook, `${orderName}.xlsx`);
